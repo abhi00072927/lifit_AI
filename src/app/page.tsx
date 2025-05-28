@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -80,7 +81,7 @@ export default function HomePage() {
     );
   }
 
-  const animationClasses = "animate-in fade-in slide-in-from-bottom-5 duration-500 ease-out";
+  const animationClasses = "animate-in fade-in slide-in-from-bottom-10 duration-700 ease-out";
 
   return (
     <>

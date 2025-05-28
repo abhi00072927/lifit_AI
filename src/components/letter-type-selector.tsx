@@ -1,3 +1,4 @@
+
 'use client';
 
 import type { LetterType, LetterTypeDetail } from '@/lib/types';
@@ -27,7 +28,7 @@ export function LetterTypeSelector({ onSelectType }: LetterTypeSelectorProps) {
             <Card
               key={type}
               onClick={() => onSelectType(type)}
-              className="cursor-pointer hover:shadow-lg transition-shadow duration-200 hover:border-primary"
+              className="cursor-pointer hover:shadow-lg transition-all duration-300 hover:border-primary hover:scale-[1.03]"
               role="button"
               tabIndex={0}
               onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && onSelectType(type)}
