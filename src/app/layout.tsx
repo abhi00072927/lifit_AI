@@ -1,3 +1,4 @@
+
 import type {Metadata} from 'next';
 import {Geist, Geist_Mono} from 'next/font/google';
 import './globals.css';
@@ -20,9 +21,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  params, // Explicitly include params in the props
 }: Readonly<{
   children: React.ReactNode;
+  params: { [key: string]: string | string[] | undefined }; // Define type for params
 }>) {
+  // Although params is not used in the component's logic,
+  // explicitly defining it here. For the root route, params will be an empty object.
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
