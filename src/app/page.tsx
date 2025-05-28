@@ -13,7 +13,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Toaster } from "@/components/ui/toaster";
 import { useToast } from "@/hooks/use-toast";
 import AOS from 'aos';
-import 'aos/dist/aos.css'; // Import AOS styles
+import 'aos/dist/aos.css'; // AOS styles are imported in globals.css now
 import LottiePlayer from 'react-lottie-player';
 // To use a Lottie animation, uncomment the line below and provide your animation JSON
 // import exampleLottieAnimation from '@/animations/example-lottie.json';
@@ -29,7 +29,7 @@ const TypingAnimation = () => {
 
   useEffect(() => {
     if (index === texts.length) { // Loop back if desired, or stop
-      // setIndex(0); 
+      // setIndex(0);
       return;
     }
 
@@ -62,11 +62,11 @@ const TypingAnimation = () => {
   }, []);
 
   return (
-    <div className="inline-block">
+    <span className="inline-block"> {/* Changed div to span */}
       <span className="text-lg sm:text-xl md:text-2xl font-semibold text-primary/80">
         {`${texts[index].substring(0, subIndex)}${blink ? "|" : " "}`}
       </span>
-    </div>
+    </span>
   );
 };
 
@@ -133,7 +133,7 @@ export default function HomePage() {
     setError(null);
     setIsLoading(false);
   };
-  
+
   if (!isClient) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-gradient-to-br from-blue-100 via-indigo-50 to-purple-100">
@@ -161,14 +161,14 @@ export default function HomePage() {
 
         {/* Lottie Animation Placeholder Section */}
         <div className="my-6 md:my-8 flex flex-col items-center" data-aos="zoom-in-up" data-aos-delay="200">
-           {/* 
+           {/*
             To add a Lottie animation:
             1. Import your Lottie JSON file: `import myAnimationData from '@/animations/my-lottie.json';`
             2. Replace the placeholder div below with:
                `<LottiePlayer loop animationData={myAnimationData} play style={{ width: 200, height: 200 }} />`
             Ensure you have a Lottie JSON file in your project (e.g., in `src/animations`).
            */}
-          <div className="p-4 bg-secondary/30 rounded-lg shadow-md flex items-center justify-center w-48 h-48">
+          <div className="p-4 bg-secondary/30 rounded-lg shadow-md flex items-center justify-center w-48 h-48 hover:shadow-xl transition-shadow duration-300">
             <LottieIconPlaceholder className="w-24 h-24 text-primary/50" />
           </div>
           <p className="text-sm text-muted-foreground mt-2">Your Lottie Animation Here</p>
