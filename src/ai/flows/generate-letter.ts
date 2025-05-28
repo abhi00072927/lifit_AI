@@ -1,3 +1,4 @@
+
 // src/ai/flows/generate-letter.ts
 'use server';
 
@@ -35,7 +36,7 @@ const generateLetterPrompt = ai.definePrompt({
   output: {schema: GenerateLetterOutputSchema},
   prompt: `You are an AI assistant specialized in generating various types of letters.
 
-  Based on the letter type and user details provided, generate a comprehensive and well-structured letter.
+  Based on the letter type and user details provided, generate a comprehensive and well-structured letter. The letter should start directly with the salutation (e.g., "Dear Mr. Smith,"). Do not include sender's address, date, or recipient's address blocks at the top; these will be handled separately.
 
   Letter Type: {{{letterType}}}
   User Details:
@@ -43,7 +44,7 @@ const generateLetterPrompt = ai.definePrompt({
     {{@key}}: {{{this}}}
   {{/each}}
 
-  Generated Letter:`, 
+  Generated Letter:`,
 });
 
 const generateLetterFlow = ai.defineFlow(
@@ -54,6 +55,25 @@ const generateLetterFlow = ai.defineFlow(
   },
   async input => {
     const {output} = await generateLetterPrompt(input);
-    return output!;
+
+    if (output && output.letter) {
+      const currentDate = new Date().toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      });
+
+      const senderInfoBlock = `[Your Address]
+[Your Phone Number]
+[Your Email Address]
+
+${currentDate}\n\n`; // Added an extra newline for spacing after the date
+
+      return {
+        letter: senderInfoBlock + output.letter,
+      };
+    }
+    return { letter: '' }; // Should not happen if prompt is well-defined
   }
 );
+
