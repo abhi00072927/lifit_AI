@@ -72,7 +72,6 @@ export default function HomePage() {
   
   if (!isClient) {
     // Render a basic loading state or null during SSR/SSG to avoid hydration mismatches
-    // if any child components rely on client-side state or browser APIs immediately.
     return (
       <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-background">
          <RotateCcw className="h-12 w-12 text-primary animate-spin mb-4" />
@@ -80,6 +79,8 @@ export default function HomePage() {
       </div>
     );
   }
+
+  const animationClasses = "animate-in fade-in slide-in-from-bottom-5 duration-500 ease-out";
 
   return (
     <>
@@ -95,7 +96,7 @@ export default function HomePage() {
 
         <div className="w-full max-w-4xl">
           {error && (
-            <Alert variant="destructive" className="mb-6">
+            <Alert variant="destructive" className={`mb-6 ${animationClasses}`}>
               <AlertCircle className="h-4 w-4" />
               <AlertTitle>Error</AlertTitle>
               <AlertDescription>{error}</AlertDescription>
@@ -103,23 +104,29 @@ export default function HomePage() {
           )}
 
           {!selectedLetterType && !generatedLetter && (
-            <LetterTypeSelector onSelectType={handleSelectLetterType} />
+            <div className={animationClasses}>
+              <LetterTypeSelector onSelectType={handleSelectLetterType} />
+            </div>
           )}
 
           {selectedLetterType && !generatedLetter && (
-            <LetterForm
-              letterType={selectedLetterType}
-              onSubmit={handleFormSubmit}
-              onBack={handleReset}
-              isLoading={isLoading}
-            />
+             <div className={animationClasses}>
+              <LetterForm
+                letterType={selectedLetterType}
+                onSubmit={handleFormSubmit}
+                onBack={handleReset}
+                isLoading={isLoading}
+              />
+            </div>
           )}
 
           {generatedLetter && (
-            <GeneratedLetter
-              letterText={generatedLetter}
-              onGenerateAnother={handleReset}
-            />
+            <div className={animationClasses}>
+              <GeneratedLetter
+                letterText={generatedLetter}
+                onGenerateAnother={handleReset}
+              />
+            </div>
           )}
         </div>
         <footer className="mt-12 text-center text-sm text-muted-foreground">
