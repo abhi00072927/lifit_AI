@@ -19,15 +19,21 @@ export const metadata: Metadata = {
   description: 'Generate professional letters with AI for various purposes.',
 };
 
+// Define an interface for the layout props
+interface RootLayoutProps {
+  children: React.ReactNode;
+  params: { [key: string]: string | string[] | undefined }; // params is standard for layouts
+}
+
 export default function RootLayout({
   children,
-  params, // Explicitly include params in the props
-}: Readonly<{
-  children: React.ReactNode;
-  params: { [key: string]: string | string[] | undefined }; // Define type for params
-}>) {
-  // Although params is not used in the component's logic,
-  // explicitly defining it here. For the root route, params will be an empty object.
+  params, // params is received but not actively used in the root layout logic
+}: RootLayoutProps) {
+  // For the root layout, 'params' will be an empty object: {}
+  // The Next.js warning "params are being enumerated" can occur if Next.js dev tools
+  // or error overlays try to inspect props by enumerating them.
+  // Accessing a specific key (e.g., params.someKey) is the recommended way to "use" params,
+  // but there are no keys to access in an empty params object for the root layout.
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
