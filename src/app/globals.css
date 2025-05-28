@@ -1,9 +1,13 @@
+/* Import AOS styles */
+@import 'aos/dist/aos.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
+    /* Keeping existing color scheme, Poppins will use these */
     --background: 0 0% 94.1%; /* #F0F0F0 Light Gray */
     --foreground: 240 10% 3.9%; /* Dark Text */
 
@@ -39,7 +43,6 @@
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
 
-    /* Sidebar specific colors, can remain default or be themed if sidebar is used */
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;
@@ -60,16 +63,16 @@
     --popover: 240 10% 3.9%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 240 50% 70%; /* Lighter Lavender for dark mode primary buttons */
-    --primary-foreground: 0 0% 10%; /* Dark text on light primary */
+    --primary: 240 50% 70%; 
+    --primary-foreground: 0 0% 10%; 
     
-    --secondary: 240 30% 18%; /* Darker Soft Lavender for dark mode secondary */
+    --secondary: 240 30% 18%; 
     --secondary-foreground: 0 0% 98%;
 
     --muted: 240 10% 14.9%;
     --muted-foreground: 0 0% 63.9%;
 
-    --accent: 206 40% 30%; /* Darker Pale Blue for dark mode accent */
+    --accent: 206 40% 30%; 
     --accent-foreground: 0 0% 98%;
 
     --destructive: 0 62.8% 30.6%;
@@ -77,7 +80,7 @@
 
     --border: 240 10% 14.9%;
     --input: 240 10% 14.9%;
-    --ring: 206 50% 50%; /* Adjusted Pale Blue for dark mode rings */
+    --ring: 206 50% 50%; 
     
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
@@ -85,7 +88,6 @@
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
 
-    /* Sidebar specific colors for dark mode */
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -102,6 +104,12 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans; /* Use font-sans which will be Poppins */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  main {
+    flex-grow: 1;
   }
 }

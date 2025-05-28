@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import defaultTheme from 'tailwindcss/defaultTheme';
 
 export default {
     darkMode: ["class"],
@@ -9,6 +10,9 @@ export default {
   ],
   theme: {
   	extend: {
+      fontFamily: {
+        sans: ['var(--font-poppins)', ...defaultTheme.fontFamily.sans],
+      },
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
@@ -82,11 +86,20 @@ export default {
   				to: {
   					height: '0'
   				}
-  			}
+  			},
+        'typewriter': {
+          'to': { 'left': '100%' }
+        },
+        'blink': {
+          '0%, 100%': { 'opacity': '1' },
+          '50%': { 'opacity': '0' }
+        }
   		},
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
-  			'accordion-up': 'accordion-up 0.2s ease-out'
+  			'accordion-up': 'accordion-up 0.2s ease-out',
+        'typewriter': 'typewriter 2s steps(10) forwards', // Adjust steps based on text length
+        'blink': 'blink 0.7s infinite'
   		}
   	}
   },
